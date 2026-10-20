@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the FitForge trainers and explore our approach to fitness, strength and wellbeing.">
+  <title>Our Trainers | FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --green-dark: #648f19;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --white: #ffffff;
+      --border: #e5eae2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: #b9f34c;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 75px 0;
+      background:
+        linear-gradient(rgba(15, 25, 17, 0.68), rgba(15, 25, 17, 0.68)),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.6rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 14px 0 18px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 25px;
+      color: #eef2ec;
+      font-size: 1.08rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 10px 0 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .trainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .trainer-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(20, 35, 20, 0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .trainer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(20, 35, 20, 0.1);
+    }
+
+    .trainer-image {
+      height: 310px;
+      overflow: hidden;
+      background: var(--light);
+    }
+
+    .trainer-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s;
+    }
+
+    .trainer-card:hover .trainer-image img {
+      transform: scale(1.04);
+    }
+
+    .trainer-info {
+      padding: 24px;
+    }
+
+    .speciality {
+      display: inline-block;
+      color: #4c7110;
+      background: #eff7df;
+      padding: 5px 11px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .trainer-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .role {
+      color: var(--green-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .trainer-info p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+    }
+
+    .trainer-link {
+      font-weight: 800;
+      color: #557e12;
+    }
+
+    .trainer-link:hover {
+      text-decoration: underline;
+    }
+
+    .approach {
+      background: var(--light);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .approach-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .approach-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #eff7df;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .approach-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .approach-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      text-align: center;
+      background: #eff7df;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin: 12px 0;
+    }
+
+    .cta p {
+      max-width: 650px;
+      color: var(--muted);
+      margin: 0 auto 24px;
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px 5%;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .trainer-grid,
+      .approach-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        min-height: 340px;
+      }
+
+      .trainer-grid,
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trainer-image {
+        height: 330px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="button nav-cta" href="join.html">Join Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Meet the team</span>
+        <h1>Guidance that<br>moves you forward.</h1>
+        <p>
+          Great training starts with the right support. Discover the
+          people and coaching approach behind your FitForge journey.
+        </p>
+        <a class="button" href="#our-trainers">Meet Our Trainers</a>
+      </div>
+    </section>
+
+    <section id="our-trainers">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Your support team</span>
+          <h2>Meet Our Trainers</h2>
+          <p>
+            Explore our example trainer profiles and the areas of fitness
+            they focus on. Trainer names and profiles can be customised
+            as your team takes shape.
+          </p>
+        </div>
+
+        <div class="trainer-grid">
+          <article class="trainer-card">
+            <div class="trainer-image">
+              <img
+                src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=900&q=85"
+                alt="Fitness trainer demonstrating strength training"
+                loading="lazy">
+            </div>
+            <div class="trainer-info">
+              <span class="speciality">Strength Training</span>
+              <h3>Alex Morgan</h3>
+              <div class="role">Strength & Conditioning</div>
+              <p>
+                Focuses on helping members learn sound lifting techniques,
+                build confidence and develop balanced training routines.
+              </p>
+              <a class="trainer-link" href="strength-training.html">
+                Explore Strength Training →
+              </a>
+            </div>
+          </article>
+
+          <article class="trainer-card">
+            <div class="trainer-image">
+              <img
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85"
+                alt="Modern gym environment for personal training"
+                loading="lazy">
+            </div>
+            <div class="trainer-info">
+              <span class="speciality">Cardio & Fitness</span>
+              <h3>Jordan Taylor</h3>
+              <div class="role">Cardio & Endurance</div>
+              <p>
+                Encourages members to improve stamina, develop consistency
+                and find enjoyable ways to stay active.
+              </p>
+              <a class="trainer-link" href="cardio.html">
+                Explore Cardio →
+              </a>
+            </div>
+          </article>
+
+          <article class="trainer-card">
+            <div class="trainer-image">
+              <img
+                src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=900&q=85"
+                alt="Person practising a controlled mobility stretch"
+                loading="lazy">
+            </div>
+            <div class="trainer-info">
+              <span class="speciality">Mobility & Wellness</span>
+              <h3>Casey Williams</h3>
+              <div class="role">Mobility & Recovery</div>
+              <p>
+                Promotes flexibility, mobility and balanced routines
+                that make room for rest and recovery.
+              </p>
+              <a class="trainer-link" href="wellness.html">
+                Explore Wellness →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="approach">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">The FitForge approach</span>
+          <h2>Support for Every Stage</h2>
+          <p>
+            Whether you're new to fitness or building on your experience,
+            good guidance can help you train with greater confidence.
+          </p>
+        </div>
+
+        <div class="approach-grid">
+          <article class="approach-card">
+            <div class="approach-icon">🎯</div>
+            <h3>Goal-Focused</h3>
+            <p>
+              Identify your priorities and work towards realistic,
+              achievable fitness milestones.
+            </p>
+          </article>
+
+          <article class="approach-card">
+            <div class="approach-icon">📈</div>
+            <h3>Steady Progress</h3>
+            <p>
+              Build consistency with a routine that can adapt as your
+              skills, experience and confidence develop.
+            </p>
+          </article>
+
+          <article class="approach-card">
+            <div class="approach-icon">🤝</div>
+            <h3>Positive Support</h3>
+            <p>
+              Learn in a welcoming environment where questions,
+              good technique and individual progress matter.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <span class="eyebrow">Your next step</span>
+        <h2>Let's work towards your goals.</h2>
+        <p>
+          Discover our training programmes or explore membership options
+          to plan your FitForge journey.
+        </p>
+        <a class="button" href="programmes.html">Explore Programmes</a>
+        <a class="button" href="memberships.html"
+          style="margin-left: 8px;">View Memberships</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
