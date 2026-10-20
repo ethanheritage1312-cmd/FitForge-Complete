@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the FitForge gym facilities, strength equipment, cardio zone and wellness spaces.">
+  <title>Facilities | FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --green-dark: #648f19;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --white: #ffffff;
+      --border: #e5eae2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: #b9f34c;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 75px 0;
+      background:
+        linear-gradient(rgba(15, 25, 17, 0.65), rgba(15, 25, 17, 0.72)),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 15px 0 18px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 25px;
+      color: #eef2ec;
+      font-size: 1.08rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      text-align: center;
+      margin: 0 auto 38px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 10px 0 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .facility-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .facility-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(20, 35, 20, 0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .facility-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(20, 35, 20, 0.1);
+    }
+
+    .facility-image {
+      height: 270px;
+      overflow: hidden;
+      background: var(--light);
+    }
+
+    .facility-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s;
+    }
+
+    .facility-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .facility-info {
+      padding: 25px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #4c7110;
+      background: #eff7df;
+      padding: 5px 11px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .facility-info h3 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .facility-info p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .text-link {
+      color: #557e12;
+      font-weight: 800;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+    }
+
+    .benefits {
+      background: var(--light);
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .benefit-card {
+      background: white;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .benefit-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #eff7df;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .benefit-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .visit {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .visit-image img {
+      height: 370px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .visit h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin: 12px 0 18px;
+    }
+
+    .visit p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .cta {
+      background: #eff7df;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin: 12px 0;
+    }
+
+    .cta p {
+      max-width: 650px;
+      color: var(--muted);
+      margin: 0 auto 24px;
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px 5%;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .benefit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .visit {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        min-height: 350px;
+      }
+
+      .facility-grid,
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .facility-image {
+        height: 230px;
+      }
+
+      .visit-image img {
+        height: 280px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="button nav-cta" href="join.html">Join Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Built for your goals</span>
+        <h1>Your space to<br>move forward.</h1>
+        <p>
+          Explore the spaces and equipment designed to support a balanced
+          fitness routine, from strength training to cardio and recovery.
+        </p>
+        <a class="button" href="#facilities">Explore Facilities</a>
+      </div>
+    </section>
+
+    <section id="facilities">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Discover FitForge</span>
+          <h2>Explore Our Facilities</h2>
+          <p>
+            Find the right environment for your workout, whether you're
+            building strength, improving endurance or making time to recover.
+          </p>
+        </div>
+
+        <div class="facility-grid">
+          <article class="facility-card">
+            <div class="facility-image">
+              <img
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=85"
+                alt="Gym interior with a range of workout equipment"
+                loading="lazy">
+            </div>
+            <div class="facility-info">
+              <span class="tag">Strength</span>
+              <h3>Strength Training Zone</h3>
+              <p>
+                Explore a dedicated training space concept for resistance
+                exercises, weight training and full-body routines.
+              </p>
+              <a class="text-link" href="strength-training.html">
+                Explore Strength Training →
+              </a>
+            </div>
+          </article>
+
+          <article class="facility-card">
+            <div class="facility-image">
+              <img
+                src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1000&q=85"
+                alt="Fitness equipment in a gym"
+                loading="lazy">
+            </div>
+            <div class="facility-info">
+              <span class="tag">Cardio</span>
+              <h3>Cardio Zone</h3>
+              <p>
+                A space concept for cardio sessions that can help you work
+                on stamina, movement and cardiovascular fitness.
+              </p>
+              <a class="text-link" href="cardio.html">
+                Explore Cardio →
+              </a>
+            </div>
+          </article>
+
+          <article class="facility-card">
+            <div class="facility-image">
+              <img
+                src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=85"
+                alt="Athlete exercising with weights"
+                loading="lazy">
+            </div>
+            <div class="facility-info">
+              <span class="tag">Functional Fitness</span>
+              <h3>Functional Training</h3>
+              <p>
+                Discover versatile training ideas using movement patterns
+                that build coordination, balance and practical strength.
+              </p>
+              <a class="text-link" href="programmes.html">
+                Explore Programmes →
+              </a>
+            </div>
+          </article>
+
+          <article class="facility-card">
+            <div class="facility-image">
+              <img
+                src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=85"
+                alt="Person practising a gentle wellness stretch"
+                loading="lazy">
+            </div>
+            <div class="facility-info">
+              <span class="tag">Wellness</span>
+              <h3>Stretch & Recovery</h3>
+              <p>
+                Make room for mobility, stretching and recovery as part
+                of a well-rounded approach to fitness.
+              </p>
+              <a class="text-link" href="wellness.html">
+                Explore Wellness →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">The FitForge experience</span>
+          <h2>Designed Around Your Journey</h2>
+          <p>
+            A good fitness environment should help you feel comfortable,
+            supported and ready to work towards your own goals.
+          </p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <div class="benefit-icon">🏋️</div>
+            <h3>Train Your Way</h3>
+            <p>
+              Explore different training styles and choose the activities
+              that fit your interests and experience.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon">📈</div>
+            <h3>Build Consistency</h3>
+            <p>
+              Create a manageable routine that supports steady progress
+              rather than chasing quick fixes.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon">🤝</div>
+            <h3>Find Support</h3>
+            <p>
+              Learn about our trainer team and the coaching approach
+              available to help you move forward.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container visit">
+        <div class="visit-image">
+          <img
+            src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1100&q=85"
+            alt="Modern gym space with fitness equipment"
+            loading="lazy">
+        </div>
+
+        <div>
+          <span class="eyebrow">Your fitness journey</span>
+          <h2>Find the right place to start.</h2>
+          <p>
+            Everyone starts somewhere. Explore our programmes, learn
+            about the team and find a fitness approach that feels right
+            for your needs.
+          </p>
+          <a class="button" href="trainers.html">Meet Our Trainers</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <span class="eyebrow">Take the next step</span>
+        <h2>Ready to join FitForge?</h2>
+        <p>
+          Explore membership options and discover how you can get started
+          on your fitness journey.
+        </p>
+        <a class="button" href="memberships.html">View Memberships</a>
+        <a class="button" href="join.html" style="margin-left: 8px;">
+          Join Now
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
