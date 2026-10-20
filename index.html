@@ -1,932 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FitForge helps you build strength, improve fitness and reach your goals with expert coaching and flexible gym memberships.">
-  <meta name="theme-color" content="#ffffff">
-  <title>FitForge | Your Fitness Starts Here</title>
-
-  <style>
-    :root {
-      --green: #b9f45b;
-      --dark: #20251f;
-      --muted: #686d66;
-      --light: #f5f7f2;
-      --white: #ffffff;
-      --border: #e4e8df;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--dark);
-      background: var(--white);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .container {
-      width: min(1160px, 90%);
-      margin: auto;
-    }
-
-    header {
-      background: rgba(255,255,255,.97);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .navbar {
-      min-height: 76px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .logo {
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      white-space: nowrap;
-    }
-
-    .logo span {
-      color: #669c25;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 23px;
-      list-style: none;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover,
-    .text-link:hover {
-      color: #669c25;
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 9px 13px;
-      background: white;
-      font-size: 23px;
-      cursor: pointer;
-    }
-
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 22px;
-      background: var(--green);
-      color: var(--dark);
-      border: 0;
-      border-radius: 7px;
-      font-weight: 800;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform .2s, background .2s;
-    }
-
-    .btn:hover {
-      background: #a7e844;
-      transform: translateY(-2px);
-    }
-
-    .btn-dark {
-      background: var(--dark);
-      color: white;
-    }
-
-    .btn-dark:hover {
-      background: #394036;
-    }
-
-    .btn-outline {
-      background: white;
-      border: 1px solid var(--border);
-    }
-
-    .hero {
-      padding: 65px 0 75px;
-      background: var(--light);
-      overflow: hidden;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      color: #527d23;
-    }
-
-    h1 {
-      font-size: clamp(43px, 5.5vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -3px;
-      margin-bottom: 22px;
-    }
-
-    h1 span {
-      color: #699d2c;
-    }
-
-    .hero-copy {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 490px;
-      margin-bottom: 29px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-image-wrap {
-      position: relative;
-    }
-
-    .hero-image {
-      height: 510px;
-      border-radius: 18px;
-      object-position: center;
-      background: #dfe5d7;
-    }
-
-    .image-label {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      padding: 17px 20px;
-      background: rgba(255,255,255,.95);
-      border-radius: 12px;
-      font-weight: 800;
-    }
-
-    .image-label small {
-      display: block;
-      color: var(--muted);
-      font-weight: 400;
-      margin-top: 3px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-top: 35px;
-      max-width: 490px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 25px;
-    }
-
-    .stat span {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    section {
-      padding: 85px 0;
-    }
-
-    .section-heading {
-      max-width: 650px;
-      margin-bottom: 38px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(30px, 4vw, 43px);
-      line-height: 1.15;
-      letter-spacing: -1.4px;
-      margin-bottom: 14px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
-    .center {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 23px;
-    }
-
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      background: white;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.07);
-    }
-
-    .card img {
-      height: 220px;
-      background: var(--light);
-    }
-
-    .card-body {
-      padding: 24px;
-    }
-
-    .card h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 19px;
-    }
-
-    .text-link {
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-    }
-
-    .about-image {
-      height: 420px;
-      border-radius: 16px;
-      background: var(--light);
-    }
-
-    .feature-list {
-      list-style: none;
-      margin: 23px 0 28px;
-    }
-
-    .feature-list li {
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    .feature-list li::before {
-      content: "✓";
-      display: inline-grid;
-      place-items: center;
-      width: 24px;
-      height: 24px;
-      margin-right: 10px;
-      border-radius: 50%;
-      background: var(--green);
-    }
-
-    .membership {
-      background: var(--light);
-    }
-
-    .price {
-      font-size: 34px;
-      font-weight: 900;
-      margin: 12px 0;
-    }
-
-    .price small {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--muted);
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eef8df;
-      color: #466e1b;
-      border-radius: 30px;
-      padding: 5px 10px;
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .cta {
-      background: var(--dark);
-      color: white;
-      border-radius: 18px;
-      padding: 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .cta h2 {
-      font-size: clamp(27px, 4vw, 40px);
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-
-    .cta p {
-      color: #d0d6ca;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-    }
-
-    .contact-info p {
-      margin: 12px 0;
-      color: var(--muted);
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: white;
-      color: var(--dark);
-      font: inherit;
-    }
-
-    .contact-form textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .form-note {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    footer {
-      padding: 45px 0 20px;
-      background: #f5f7f2;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 35px;
-      padding-bottom: 30px;
-    }
-
-    .footer-grid p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 12px;
-      max-width: 330px;
-    }
-
-    .footer-grid h4 {
-      margin-bottom: 12px;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin: 8px 0;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .copyright {
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .nav-links {
-        gap: 13px;
-        font-size: 12px;
-      }
-
-      .nav-join {
-        display: none;
-      }
-
-      .hero-grid,
-      .about-grid {
-        gap: 30px;
-      }
-
-      .hero-image {
-        height: 420px;
-      }
-
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 650px) {
-      .navbar {
-        min-height: 68px;
-      }
-
-      .logo {
-        font-size: 25px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-        padding: 20px 5%;
-        background: white;
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        font-size: 15px;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links li a {
-        display: block;
-        padding: 12px 0;
-      }
-
-      .nav-join {
-        display: block;
-      }
-
-      .hero {
-        padding: 48px 0;
-      }
-
-      .hero-grid,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .hero-copy {
-        font-size: 15px;
-      }
-
-      .hero-image {
-        height: 390px;
-      }
-
-      .stats {
-        gap: 8px;
-      }
-
-      .stat strong {
-        font-size: 22px;
-      }
-
-      section {
-        padding: 62px 0;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .card img {
-        height: 235px;
-      }
-
-      .about-image {
-        height: 310px;
-      }
-
-      .cta {
-        padding: 30px 23px;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .footer-brand {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FitForge brings together gym workouts, home training, fitness programmes and practical guidance for your fitness journey.">
+<title>FitForge | Your Fitness Journey Starts Here</title>
+<style>
+:root {
+  --green: #a6e22e;
+  --green-dark: #648f19;
+  --dark: #172019;
+  --muted: #657067;
+  --light: #f6f8f4;
+  --border: #e3e9df;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--dark);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+.logo span { color: var(--green-dark); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.nav-links a:hover { color: var(--green-dark); }
+.join-link {
+  background: var(--green);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.menu-button {
+  display: none;
+  border: 0;
+  background: var(--light);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.hero {
+  min-height: 590px;
+  display: flex;
+  align-items: center;
+  padding: 75px 5%;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(15,25,17,.85), rgba(15,25,17,.30)),
+    url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2000&q=90")
+    center/cover;
+}
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+}
+.eyebrow {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+h1 {
+  max-width: 720px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 16px 0;
+}
+.hero p {
+  max-width: 590px;
+  font-size: 18px;
+  color: #e5e9e3;
+}
+.button {
+  display: inline-block;
+  margin: 14px 8px 0 0;
+  padding: 14px 21px;
+  border-radius: 8px;
+  background: var(--green);
+  color: var(--dark);
+  font-weight: 800;
+  transition: transform .2s;
+}
+.button:hover { transform: translateY(-2px); }
+.button-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.8);
+  color: white;
+}
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 70px 5%;
+}
+.section-heading {
+  max-width: 700px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+.section-heading h2 {
+  font-size: clamp(29px, 4.5vw, 44px);
+  line-height: 1.15;
+  margin: 10px 0;
+}
+.section-heading p { color: var(--muted); }
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+.choice-card {
+  overflow: hidden;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(23,32,25,.05);
+}
+.choice-card img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.choice-content { padding: 27px; }
+.pill {
+  display: inline-block;
+  background: #edf6df;
+  color: #4b6d19;
+  padding: 5px 10px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .6px;
+}
+.choice-content h3 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+.choice-content p { color: var(--muted); }
+.choice-content ul { padding-left: 20px; color: var(--muted); }
+.choice-content li { margin: 7px 0; }
+.choice-content .button { margin-top: 6px; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.feature {
+  padding: 27px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+}
+.feature-icon { font-size: 30px; }
+.feature h3 { font-size: 20px; margin: 10px 0 5px; }
+.feature p { color: var(--muted); margin-bottom: 0; }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+.split img {
+  display: block;
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+.split h2 {
+  font-size: clamp(29px, 4vw, 43px);
+  line-height: 1.15;
+}
+.split p { color: var(--muted); }
+.split ul { padding-left: 20px; }
+.split li { margin: 9px 0; }
+.light-section { background: var(--light); }
+.cta {
+  text-align: center;
+  padding: 65px 5%;
+  background: var(--dark);
+  color: white;
+}
+.cta h2 {
+  font-size: clamp(30px, 5vw, 46px);
+  margin: 10px 0;
+}
+.cta p {
+  max-width: 620px;
+  margin: auto;
+  color: #c5cec4;
+}
+footer {
+  background: #111812;
+  color: white;
+  padding: 35px 5%;
+  text-align: center;
+}
+footer p { color: #c5cec4; font-size: 13px; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin: 18px 0;
+  font-size: 13px;
+}
+@media(max-width:1050px) {
+  .menu-button { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 20px 5%;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-links.open { display: flex; }
+}
+@media(max-width:700px) {
+  .hero { min-height: 510px; padding: 65px 5%; }
+  h1 { letter-spacing: -1px; }
+  .section { padding: 48px 5%; }
+  .choice-grid, .feature-grid, .split { grid-template-columns: 1fr; }
+  .choice-card img { height: 240px; }
+  .split img { height: 270px; }
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <nav class="navbar container" aria-label="Main navigation">
-      <a class="logo" href="index.html">FIT<span>FORGE</span></a>
 
-      <button class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="navLinks">☰</button>
+<header>
+<nav class="nav">
+  <a class="logo" href="index.html">Fit<span>Forge</span></a>
+  <button class="menu-button" id="menuButton" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="trainers.html">Trainers</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="memberships.html">Memberships</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="testimonials.html">Reviews</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="join-link" href="join.html">Join Now</a>
+  </div>
+</nav>
+</header>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="programmes.html">Programmes</a></li>
-        <li><a href="memberships.html">Memberships</a></li>
-        <li><a href="trainers.html">Trainers</a></li>
-        <li><a href="facilities.html">Facilities</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="nav-join"><a class="btn" href="join.html">Join Now ↗</a></li>
-      </ul>
-    </nav>
-  </header>
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">Fitness for every lifestyle</span>
+    <h1>Your Fitness Journey Starts Here.</h1>
+    <p>
+      Whether you train in a gym or from home, FitForge helps you
+      explore workout ideas, build healthy habits and find a routine
+      that fits your life.
+    </p>
+    <a class="button" href="#workouts">Explore Workouts →</a>
+    <a class="button button-outline" href="about.html">Discover FitForge</a>
+  </div>
+</section>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">Your goals. Your strength. Your journey.</span>
-          <h1>Your fitness journey <span>starts here.</span></h1>
-          <p class="hero-copy">
-            Train with purpose, build healthy habits and become stronger
-            at your own pace. Welcome to a fitness community built for everyone.
-          </p>
+<section class="section" id="workouts">
+  <div class="section-heading">
+    <span class="eyebrow">Choose your training style</span>
+    <h2>One Goal. Two Ways to Get Moving.</h2>
+    <p>
+      Find a training environment that suits your lifestyle.
+      Start at your own level and build consistency over time.
+    </p>
+  </div>
 
-          <div class="hero-actions">
-            <a class="btn" href="memberships.html">Explore Memberships →</a>
-            <a class="btn btn-outline" href="programmes.html">Discover Training</a>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong>All</strong>
-              <span>Fitness levels</span>
-            </div>
-            <div class="stat">
-              <strong>Real</strong>
-              <span>Personal progress</span>
-            </div>
-            <div class="stat">
-              <strong>One</strong>
-              <span>Stronger community</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-image-wrap">
-          <img class="hero-image"
-            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85"
-            alt="Modern gym training space"
-            fetchpriority="high">
-          <div class="image-label">
-            Stronger starts today.
-            <small>A welcoming space for every fitness journey.</small>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Find your focus</span>
-          <h2>Training that moves you forward.</h2>
-          <p>Explore different ways to train, improve your fitness and work towards your personal goals.</p>
-        </div>
-
-        <div class="cards">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=700&q=80"
-              alt="Strength training with weights" loading="lazy">
-            <div class="card-body">
-              <h3>Strength Training</h3>
-              <p>Build strength and learn to use resistance training equipment with confidence.</p>
-              <a class="text-link" href="strength-training.html">Explore strength →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=700&q=80"
-              alt="Cardio fitness training" loading="lazy">
-            <div class="card-body">
-              <h3>Cardio & Fitness</h3>
-              <p>Improve endurance with activities that suit your fitness level and interests.</p>
-              <a class="text-link" href="cardio.html">Explore cardio →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80"
-              alt="Guided flexibility and movement training" loading="lazy">
-            <div class="card-body">
-              <h3>Mobility & Wellness</h3>
-              <p>Make room for mobility, flexibility, recovery and balanced training habits.</p>
-              <a class="text-link" href="wellness.html">Explore wellness →</a>
-            </div>
-          </article>
-        </div>
-
-        <p style="margin-top:28px">
-          <a class="btn btn-dark" href="programmes.html">View All Programmes →</a>
+  <div class="choice-grid">
+    <article class="choice-card">
+      <img
+        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=85"
+        alt="Modern gym with weights and training equipment">
+      <div class="choice-content">
+        <span class="pill">GYM WORKOUTS</span>
+        <h3>Train at the Gym</h3>
+        <p>
+          Explore equipment-based training, strength exercises and
+          structured workouts in a dedicated training environment.
         </p>
+        <ul>
+          <li>Strength and resistance training</li>
+          <li>Machine and free-weight exercises</li>
+          <li>Full-body workout ideas</li>
+        </ul>
+        <a class="button" href="programmes.html#gym-programmes">Explore Gym Training →</a>
       </div>
-    </section>
+    </article>
 
-    <section style="background:#f5f7f2">
-      <div class="container about-grid">
-        <img class="about-image"
-          src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1000&q=85"
-          alt="Fitness centre with gym equipment" loading="lazy">
-
-        <div>
-          <span class="eyebrow">More than a gym</span>
-          <h2 style="font-size:clamp(32px,4vw,45px);line-height:1.15">
-            Progress looks different on everyone.
-          </h2>
-          <p style="color:var(--muted);margin-top:17px">
-            At FitForge, your journey is your own. Whether you are just getting
-            started or looking to develop your training, discover a supportive
-            environment focused on consistency and progress.
-          </p>
-
-          <ul class="feature-list">
-            <li>Options for different fitness levels</li>
-            <li>Flexible training and membership choices</li>
-            <li>Supportive coaching opportunities</li>
-            <li>A community built around progress</li>
-          </ul>
-
-          <a class="btn btn-dark" href="about.html">Discover FitForge →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="membership">
-      <div class="container">
-        <div class="section-heading center">
-          <span class="eyebrow">Membership options</span>
-          <h2>Find a plan that fits your life.</h2>
-          <p>Explore membership options and compare the benefits before choosing what works for you.</p>
-        </div>
-
-        <div class="cards">
-          <article class="card">
-            <div class="card-body">
-              <span class="tag">Getting started</span>
-              <h3 style="margin-top:15px">Starter</h3>
-              <p>A simple way to begin your fitness journey.</p>
-              <ul class="feature-list">
-                <li>Gym access options</li>
-                <li>Independent training</li>
-                <li>Beginner-friendly resources</li>
-              </ul>
-              <a class="btn btn-outline" href="memberships.html">View Details →</a>
-            </div>
-          </article>
-
-          <article class="card" style="border:2px solid #b9f45b">
-            <div class="card-body">
-              <span class="tag">More flexibility</span>
-              <h3 style="margin-top:15px">Plus</h3>
-              <p>For members looking for more ways to train.</p>
-              <ul class="feature-list">
-                <li>Membership benefits to compare</li>
-                <li>Programme options</li>
-                <li>Additional training support</li>
-              </ul>
-              <a class="btn" href="memberships.html">Compare Plans →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-body">
-              <span class="tag">Personal support</span>
-              <h3 style="margin-top:15px">Coaching</h3>
-              <p>Explore personalised guidance for your goals.</p>
-              <ul class="feature-list">
-                <li>Personal training options</li>
-                <li>Goal-focused support</li>
-                <li>Individual enquiries</li>
-              </ul>
-              <a class="btn btn-outline" href="trainers.html">Meet Our Trainers →</a>
-            </div>
-          </article>
-        </div>
-
-        <p style="text-align:center;margin-top:25px;color:var(--muted);font-size:13px">
-          Membership prices and availability will be added when we configure your plans.
+    <article class="choice-card">
+      <img
+        src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=85"
+        alt="Home exercise session on a fitness mat">
+      <div class="choice-content">
+        <span class="pill">HOME WORKOUTS</span>
+        <h3>Train at Home</h3>
+        <p>
+          Build an exercise routine around your space, your schedule
+          and the equipment you already have available.
         </p>
+        <ul>
+          <li>Bodyweight exercises</li>
+          <li>Optional dumbbells and resistance bands</li>
+          <li>Flexible home training ideas</li>
+        </ul>
+        <a class="button" href="programmes.html#home-programmes">Explore Home Training →</a>
       </div>
-    </section>
+    </article>
+  </div>
+</section>
 
-    <section>
-      <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Ready to take your next step?</h2>
-            <p>Explore your options and find a place to begin.</p>
-          </div>
-          <a class="btn" href="join.html">Start Your Journey ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container contact-grid">
-        <div class="contact-info">
-          <span class="eyebrow">Get in touch</span>
-          <h2 style="font-size:40px;line-height:1.15">Let's talk about your goals.</h2>
-          <p>Have questions about training, memberships or getting started? Send us an enquiry.</p>
-          <p><strong>Memberships:</strong> <a class="text-link" href="memberships.html">Explore membership options</a></p>
-          <p><strong>Training:</strong> <a class="text-link" href="programmes.html">Browse programmes</a></p>
-          <p><strong>Personal coaching:</strong> <a class="text-link" href="trainers.html">Meet the trainers</a></p>
-        </div>
-
-        <form class="contact-form" id="contactForm">
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" placeholder="Enter your name" required>
-
-          <label for="email">Email address</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="message">How can we help?</label>
-          <textarea id="message" name="message" placeholder="Tell us what you would like to know..." required></textarea>
-
-          <button class="btn" type="submit">Prepare Enquiry →</button>
-          <p class="form-note">This demo prepares an email in your email app. It does not store or send form data to a server.</p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="logo" href="index.html">FIT<span>FORGE</span></a>
-          <p>Your fitness journey starts here. Find your focus, build your habits and keep moving forward.</p>
-        </div>
-
-        <div>
-          <h4>Explore</h4>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="programmes.html">Programmes</a></li>
-            <li><a href="memberships.html">Memberships</a></li>
-            <li><a href="facilities.html">Facilities</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Get Started</h4>
-          <ul class="footer-links">
-            <li><a href="trainers.html">Our Trainers</a></li>
-            <li><a href="join.html">Join FitForge</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="#contact">Send an Enquiry</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="copyright">
-        © <span id="year"></span> FitForge. All rights reserved.
-      </div>
+<section class="light-section">
+  <div class="section">
+    <div class="section-heading">
+      <span class="eyebrow">The FitForge approach</span>
+      <h2>Fitness That Fits Real Life</h2>
+      <p>
+        A helpful starting point for beginners and a source of inspiration
+        for anyone looking to build a consistent exercise routine.
+      </p>
     </div>
-  </footer>
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+    <div class="feature-grid">
+      <article class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3>Set Your Goals</h3>
+        <p>Explore different ways to approach strength, fitness, movement and personal progress.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">📅</div>
+        <h3>Build a Routine</h3>
+        <p>Discover workout ideas that can fit around your daily responsibilities and schedule.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">🌱</div>
+        <h3>Progress Gradually</h3>
+        <p>Focus on good technique, regular activity, recovery and small sustainable improvements.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
+<section class="section">
+  <div class="split">
+    <img
+      src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1100&q=85"
+      alt="Athlete exercising with a fitness mat">
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
-        menuToggle.textContent = "☰";
-      });
-    });
+    <div>
+      <span class="eyebrow">Start where you are</span>
+      <h2>You Don't Need to Be an Expert to Begin.</h2>
+      <p>
+        Your fitness journey doesn't have to look like anybody else's.
+        Choose movements that suit your experience, learn as you go
+        and make time for rest.
+      </p>
+      <ul>
+        <li>Explore beginner-friendly workout ideas.</li>
+        <li>Choose gym or home exercise options.</li>
+        <li>Learn more about training and healthy habits.</li>
+      </ul>
+      <a class="button" href="programmes.html">Find a Programme →</a>
+      <a class="button" href="blog.html">Read Fitness Tips →</a>
+    </div>
+  </div>
+</section>
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+<section class="light-section">
+  <div class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Explore FitForge</span>
+      <h2>Your Fitness Resource Hub</h2>
+      <p>Browse the website to learn more about training, the FitForge concept and available options.</p>
+    </div>
 
-    document.getElementById("contactForm").addEventListener(
-      "submit",
-      function (event) {
-        event.preventDefault();
+    <div class="feature-grid">
+      <article class="feature">
+        <div class="feature-icon">📚</div>
+        <h3>Fitness Articles</h3>
+        <p>Explore practical information and ideas for your fitness journey.</p>
+        <a class="button" href="blog.html">Visit the Blog →</a>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">🖼️</div>
+        <h3>Fitness Gallery</h3>
+        <p>Browse fitness imagery and training inspiration.</p>
+        <a class="button" href="gallery.html">View Gallery →</a>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">❓</div>
+        <h3>Common Questions</h3>
+        <p>Find answers about gym training, home workouts and getting started.</p>
+        <a class="button" href="faq.html">Read FAQs →</a>
+      </article>
+    </div>
+  </div>
+</section>
 
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
+<section class="cta">
+  <span class="eyebrow">Your next step</span>
+  <h2>Ready to Start Your Journey?</h2>
+  <p>
+    Explore FitForge, find a training style that works for you
+    and take your next step toward a more active lifestyle.
+  </p>
+  <a class="button" href="programmes.html">Explore Programmes →</a>
+  <a class="button button-outline" href="contact.html">Contact Us</a>
+</section>
+</main>
 
-        const subject = encodeURIComponent("FitForge website enquiry");
-        const body = encodeURIComponent(
-          "Name: " + name +
-          "\nEmail: " + email +
-          "\n\nMessage:\n" + message
-        );
+<footer>
+  <a class="logo" href="index.html">Fit<span>Forge</span></a>
+  <p>Build strength. Build confidence. Build your future.</p>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="trainers.html">Trainers</a>
+    <a href="memberships.html">Memberships</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="testimonials.html">Reviews</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© <span id="year"></span> FitForge. All rights reserved.</p>
+</footer>
 
-        window.location.href =
-          "mailto:?subject=" + subject + "&body=" + body;
-      }
-    );
-  </script>
+<script>
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", function () {
+  const isOpen = navLinks.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", isOpen);
+  menuButton.textContent = isOpen ? "✕" : "☰";
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
-
