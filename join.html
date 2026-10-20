@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start your FitForge membership enquiry.">
+  <title>Join FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --green-dark: #648f19;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --border: #e3e9df;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: var(--light);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--dark);
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .button:hover {
+      background: #b9f34c;
+    }
+
+    .hero {
+      padding: 65px 0;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(16, 26, 18, 0.75), rgba(16, 26, 18, 0.75)),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=85")
+        center/cover no-repeat;
+    }
+
+    .eyebrow {
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      margin: 12px 0;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #edf2eb;
+    }
+
+    main {
+      padding: 55px 0 75px;
+    }
+
+    .join-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .intro h2 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin: 12px 0 16px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .intro-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-top: 12px;
+    }
+
+    .benefits {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .benefits li {
+      margin: 10px 0;
+      font-weight: 700;
+    }
+
+    .benefits li::before {
+      content: "✓ ";
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .form-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 12px 35px rgba(20, 35, 20, 0.06);
+    }
+
+    .form-card h2 {
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+    }
+
+    .form-description {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7ded3;
+      border-radius: 8px;
+      background: white;
+      color: var(--dark);
+      font: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--green);
+      outline-offset: 1px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .consent input {
+      width: auto;
+      margin-top: 5px;
+    }
+
+    .form-card .button {
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 15px;
+    }
+
+    .status {
+      display: none;
+      padding: 14px;
+      margin-top: 18px;
+      background: #eff7df;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 950px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .join-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-image {
+        height: 320px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 50px 0;
+      }
+
+      main {
+        padding: 35px 0 50px;
+      }
+
+      .form-card {
+        padding: 23px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .intro-image {
+        height: 230px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Your journey starts here</span>
+      <h1>Become part of FitForge.</h1>
+      <p>
+        Tell us a little about yourself and the membership you're
+        interested in. Take the next step towards your fitness goals.
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container join-layout">
+      <section class="intro">
+        <span class="eyebrow">Welcome to the community</span>
+        <h2>Your goals. Your pace. Your FitForge.</h2>
+        <p>
+          Whether you're starting out or looking for a fresh routine,
+          choose the membership that best matches your needs.
+        </p>
+
+        <ul class="benefits">
+          <li>Explore membership options</li>
+          <li>Discover training programmes</li>
+          <li>Build a routine around your goals</li>
+          <li>Take your next step with confidence</li>
+        </ul>
+
+        <img
+          class="intro-image"
+          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1000&q=85"
+          alt="Athletes training in a gym"
+        >
+
+        <p style="margin-top: 18px;">
+          Still deciding? Visit our
+          <a href="memberships.html" style="color: var(--green-dark); font-weight: 800;">
+            memberships page
+          </a>
+          to compare the example plans.
+        </p>
+      </section>
+
+      <section class="form-card">
+        <h2>Membership enquiry</h2>
+        <p class="form-description">
+          Complete the form to preview your enquiry. This demo does not
+          send or store your information.
+        </p>
+
+        <form id="joinForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="firstName">First name *</label>
+              <input id="firstName" name="firstName"
+                type="text" autocomplete="given-name" required>
+            </div>
+
+            <div class="field">
+              <label for="lastName">Last name *</label>
+              <input id="lastName" name="lastName"
+                type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email address *</label>
+            <input id="email" name="email" type="email"
+              autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel"
+              autocomplete="tel" placeholder="Your contact number">
+          </div>
+
+          <div class="field">
+            <label for="plan">Choose a membership *</label>
+            <select id="plan" name="plan" required>
+              <option value="">Select a plan</option>
+              <option value="Starter">Starter — example R299/month</option>
+              <option value="Plus">Plus — example R449/month</option>
+              <option value="Premium">Premium — example R699/month</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="goals">What are your fitness goals?</label>
+            <select id="goals" name="goals">
+              <option value="">Choose an option</option>
+              <option>Build strength</option>
+              <option>Improve fitness and stamina</option>
+              <option>Learn how to use gym equipment</option>
+              <option>Develop a consistent routine</option>
+              <option>General wellbeing</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Anything else you'd like us to know?</label>
+            <textarea id="message" name="message"
+              placeholder="Write your message here (optional)"></textarea>
+          </div>
+
+          <label class="consent" for="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <span>I understand this is a demonstration form and my details will not be sent anywhere. *</span>
+          </label>
+
+          <button class="button" type="submit">Preview My Enquiry</button>
+
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+
+          <p class="form-note">
+            No payment is taken on this page. Membership prices and
+            terms must be confirmed before a real service launches.
+          </p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const params = new URLSearchParams(window.location.search);
+    const requestedPlan = params.get("plan");
+    const planSelect = document.getElementById("plan");
+
+    const planOptions = {
+      starter: "Starter",
+      plus: "Plus",
+      premium: "Premium"
+    };
+
+    if (requestedPlan && planOptions[requestedPlan.toLowerCase()]) {
+      planSelect.value = planOptions[requestedPlan.toLowerCase()];
+    }
+
+    document.getElementById("joinForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const selectedPlan = planSelect.value;
+
+      const status = document.getElementById("status");
+      status.textContent =
+        "Thanks, " + firstName + "! Your " + selectedPlan +
+        " enquiry preview is ready. This is only a demo: nothing has been sent or saved. A real submission system must be connected before launch.";
+
+      status.classList.add("show");
+      status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+</body>
+</html>
