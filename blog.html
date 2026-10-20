@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore FitForge fitness articles, beginner workout tips, recovery advice and healthy lifestyle guidance.">
+  <title>Fitness Blog | FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --green-dark: #648f19;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --border: #e3e9df;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: white;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
+      text-align: center;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #b9f34c;
+    }
+
+    .hero {
+      padding: 85px 0;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(15, 25, 17, 0.72), rgba(15, 25, 17, 0.76)),
+        url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.3rem);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin: 14px 0;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 25px;
+      color: #eef2ec;
+      font-size: 1.05rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 35px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin: 10px 0;
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 35px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--light);
+    }
+
+    .featured img {
+      height: 360px;
+      border-radius: 12px;
+    }
+
+    .article-tag {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 30px;
+      background: #eaf5d5;
+      color: var(--green-dark);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .featured h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.2;
+      margin: 15px 0;
+    }
+
+    .featured p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 23px;
+    }
+
+    .article-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(20, 35, 20, 0.09);
+    }
+
+    .article-card img {
+      height: 220px;
+    }
+
+    .article-content {
+      padding: 22px;
+    }
+
+    .article-content h3 {
+      font-size: 1.2rem;
+      line-height: 1.35;
+      margin: 12px 0 9px;
+    }
+
+    .article-content p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .read-link {
+      color: var(--green-dark);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .read-link:hover {
+      text-decoration: underline;
+    }
+
+    .search-box {
+      max-width: 520px;
+      margin: 0 auto 30px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    .search-box input:focus {
+      outline: 2px solid var(--green);
+      outline-offset: 1px;
+    }
+
+    .empty-message {
+      display: none;
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+    }
+
+    .empty-message.show {
+      display: block;
+    }
+
+    .newsletter {
+      background: var(--light);
+    }
+
+    .newsletter-card {
+      max-width: 760px;
+      margin: auto;
+      padding: 38px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .newsletter-card h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin: 10px 0;
+    }
+
+    .newsletter-card p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    .newsletter-note {
+      font-size: 0.8rem;
+      margin-top: 12px;
+    }
+
+    .status {
+      display: none;
+      background: #eff7df;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .cta {
+      text-align: center;
+      background: #eff7df;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      margin: 10px 0;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 950px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .featured {
+        grid-template-columns: 1fr;
+      }
+
+      .featured img {
+        height: 300px;
+      }
+
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .featured {
+        padding: 18px;
+      }
+
+      .featured img {
+        height: 230px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-card {
+        padding: 24px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Knowledge builds confidence</span>
+        <h1>Learn. Move. Improve.</h1>
+        <p>
+          Explore practical fitness ideas, beginner-friendly training
+          guidance and healthy habits to support your journey.
+        </p>
+        <a class="button" href="#articles">Explore Articles</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="featured">
+          <img
+            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1100&q=85"
+            alt="Athlete exercising in a gym"
+            loading="lazy">
+
+          <div>
+            <span class="article-tag">Featured guide</span>
+            <h2>How to Start Your Fitness Journey</h2>
+            <p>
+              Starting a new routine doesn't need to be complicated.
+              Learn how to choose manageable activities, create a
+              realistic schedule and build consistency over time.
+            </p>
+            <a class="read-link" href="#article-beginners">
+              Read the beginner guide →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="articles">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">The FitForge blog</span>
+          <h2>Ideas for Your Fitness Journey</h2>
+          <p>
+            Search our sample article collection for tips on training,
+            recovery, nutrition and building healthy habits.
+          </p>
+        </div>
+
+        <div class="search-box">
+          <input
+            id="articleSearch"
+            type="search"
+            placeholder="Search articles..."
+            aria-label="Search articles">
+        </div>
+
+        <div class="article-grid" id="articleGrid">
+          <article class="article-card" id="article-beginners"
+            data-search="beginner starting gym fitness routine consistency">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85"
+              alt="Gym interior with exercise equipment"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Beginners</span>
+              <h3>5 Tips for Your First Month at the Gym</h3>
+              <p>
+                Start with achievable goals, learn equipment basics
+                and give yourself time to develop a routine.
+              </p>
+              <a class="read-link" href="#beginner-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+
+          <article class="article-card" data-search="strength training weights technique rest">
+            <img
+              src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=85"
+              alt="Strength training weights"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Training</span>
+              <h3>Understanding Strength Training</h3>
+              <p>
+                Discover the basics of resistance training, good
+                technique and gradual progression.
+              </p>
+              <a class="read-link" href="#strength-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+
+          <article class="article-card" data-search="recovery sleep rest mobility flexibility">
+            <img
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=85"
+              alt="Person practising a mobility exercise"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Recovery</span>
+              <h3>Why Recovery Belongs in Your Routine</h3>
+              <p>
+                Learn why rest, sleep and comfortable movement are
+                useful parts of an exercise routine.
+              </p>
+              <a class="read-link" href="#recovery-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+
+          <article class="article-card" data-search="nutrition balanced meals hydration food energy">
+            <img
+              src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=85"
+              alt="A variety of balanced foods"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Nutrition</span>
+              <h3>Everyday Nutrition Basics</h3>
+              <p>
+                Explore balanced meals, hydration and simple ways
+                to support your everyday activities.
+              </p>
+              <a class="read-link" href="#nutrition-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+
+          <article class="article-card" data-search="motivation habits goals consistency schedule">
+            <img
+              src="https://images.unsplash.com/photo-1517838277536-f6e8d6e3c8cb?auto=format&fit=crop&w=800&q=85"
+              alt="Person preparing for a workout"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Motivation</span>
+              <h3>Build Habits That Fit Your Life</h3>
+              <p>
+                Make exercise easier to maintain by planning around
+                your schedule and choosing activities you enjoy.
+              </p>
+              <a class="read-link" href="#habits-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+
+          <article class="article-card" data-search="cardio walking running stamina heart fitness">
+            <img
+              src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=800&q=85"
+              alt="Athlete doing a cardio workout"
+              loading="lazy">
+            <div class="article-content">
+              <span class="article-tag">Cardio</span>
+              <h3>Getting Started With Cardio</h3>
+              <p>
+                Find out how walking, cycling and other enjoyable
+                activities can help develop endurance.
+              </p>
+              <a class="read-link" href="#cardio-guide">
+                Read tips ↓
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <p class="empty-message" id="emptyMessage">
+          No matching articles found. Try a different search.
+        </p>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter-card">
+          <span class="eyebrow">Stay inspired</span>
+          <h2>Fitness ideas, all in one place.</h2>
+          <p>
+            This newsletter form is a demonstration of the future
+            FitForge email sign-up experience.
+          </p>
+
+          <form class="newsletter-form" id="newsletterForm">
+            <input
+              type="email"
+              id="newsletterEmail"
+              placeholder="Enter your email address"
+              aria-label="Email address"
+              required>
+            <button class="button" type="submit">Preview Sign-Up</button>
+          </form>
+
+          <div class="status" id="newsletterStatus"
+            role="status" aria-live="polite"></div>
+
+          <p class="newsletter-note">
+            Demo only: your email will not be sent or stored.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="beginner-guide">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Beginner guide</span>
+          <h2>5 Tips for Getting Started</h2>
+          <p>Simple principles that can help you build a sustainable routine.</p>
+        </div>
+
+        <div class="article-grid">
+          <article class="article-card">
+            <div class="article-content">
+              <h3>1. Start at Your Own Pace</h3>
+              <p>
+                Choose manageable activities and build up gradually
+                as your confidence and experience grow.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-content">
+              <h3>2. Learn Good Technique</h3>
+              <p>
+                Ask a qualified trainer for help with unfamiliar
+                equipment and exercises.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-content">
+              <h3>3. Make a Realistic Plan</h3>
+              <p>
+                Choose days and activities that fit your everyday
+                schedule instead of trying to do everything at once.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card" id="strength-guide">
+            <div class="article-content">
+              <h3>4. Practise Consistently</h3>
+              <p>
+                Regular practice and gradual progression are more
+                sustainable than constantly changing your routine.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card" id="recovery-guide">
+            <div class="article-content">
+              <h3>5. Allow Time for Recovery</h3>
+              <p>
+                Include rest, sufficient sleep and comfortable
+                movement as part of a balanced routine.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card" id="nutrition-guide">
+            <div class="article-content">
+              <h3>Keep Your Approach Balanced</h3>
+              <p>
+                Eat a variety of foods, drink water regularly and
+                seek qualified advice for individual nutrition needs.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card" id="habits-guide">
+            <div class="article-content">
+              <h3>Make Habits Easier to Maintain</h3>
+              <p>
+                Prepare your gym bag, schedule sessions and choose
+                activities that make you feel comfortable.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card" id="cardio-guide">
+            <div class="article-content">
+              <h3>Explore Cardio Activities</h3>
+              <p>
+                Walking, cycling, swimming and dancing are examples
+                of activities you can adapt to your ability.
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-content">
+              <h3>Ask for Guidance</h3>
+              <p>
+                A qualified fitness professional can help you
+                choose suitable exercises and learn safe technique.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <span class="eyebrow">Keep moving forward</span>
+        <h2>Put your knowledge into action.</h2>
+        <p>
+          Explore the FitForge programmes and membership concepts
+          to discover what the rest of the website offers.
+        </p>
+        <a class="button" href="programmes.html">Explore Programmes</a>
+        <a class="button" href="memberships.html" style="margin-left: 8px;">
+          View Memberships
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const searchInput = document.getElementById("articleSearch");
+    const articleCards = document.querySelectorAll(
+      "#articleGrid .article-card"
+    );
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    searchInput.addEventListener("input", function () {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      articleCards.forEach(function (card) {
+        const searchableText =
+          (card.dataset.search || "") + " " + card.textContent.toLowerCase();
+
+        const matches = searchableText.includes(searchTerm);
+        card.hidden = !matches;
+
+        if (matches) {
+          visibleCount++;
+        }
+      });
+
+      emptyMessage.classList.toggle("show", visibleCount === 0);
+    });
+
+    document.getElementById("newsletterForm").addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+
+        document.getElementById("newsletterStatus").textContent =
+          "Thank you! Your sign-up preview is ready. This demo does not send or store your email.";
+
+        document.getElementById("newsletterStatus").classList.add("show");
+      }
+    );
+  </script>
+</body>
+</html>
