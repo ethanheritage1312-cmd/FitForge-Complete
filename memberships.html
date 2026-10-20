@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore FitForge membership options and find a fitness plan that suits your goals.">
+  <title>Memberships | FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --green-dark: #648f19;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --white: #ffffff;
+      --border: #e5eae2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: white;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
+      text-align: center;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      background: #b9f34c;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      color: white;
+      padding: 85px 0;
+      background:
+        linear-gradient(rgba(15, 25, 17, 0.72), rgba(15, 25, 17, 0.72)),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.6rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 15px 0 18px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 25px;
+      color: #eef2ec;
+      font-size: 1.08rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 38px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 10px 0 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .billing-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: -18px;
+      margin-bottom: 30px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(20, 35, 20, 0.05);
+    }
+
+    .price-card.featured {
+      border: 2px solid var(--green);
+      box-shadow: 0 12px 32px rgba(85, 126, 18, 0.12);
+    }
+
+    .popular {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--green);
+      color: var(--dark);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .plan-name {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .plan-description {
+      color: var(--muted);
+      font-size: 0.92rem;
+      min-height: 48px;
+    }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin: 22px 0 4px;
+    }
+
+    .price span {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .price-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      list-style: none;
+      margin: 12px 0 25px;
+      flex: 1;
+    }
+
+    .features li {
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0eb;
+      font-size: 0.92rem;
+    }
+
+    .features li::before {
+      content: "✓ ";
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .price-card .button {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .benefits {
+      background: var(--light);
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .benefit-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 27px;
+    }
+
+    .benefit-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: #eff7df;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      margin-bottom: 17px;
+    }
+
+    .benefit-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .benefit-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    details p {
+      color: var(--muted);
+      padding-top: 12px;
+    }
+
+    .cta {
+      text-align: center;
+      background: #eff7df;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin: 12px 0;
+    }
+
+    .cta p {
+      max-width: 650px;
+      color: var(--muted);
+      margin: 0 auto 24px;
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 950px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px 5%;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        margin: auto;
+      }
+
+      .benefit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card {
+        padding: 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="button nav-cta" href="join.html">Join Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Invest in your wellbeing</span>
+        <h1>Find your FitForge<br>membership.</h1>
+        <p>
+          Choose a membership concept that matches your training style.
+          Start with the essentials or explore options with additional support.
+        </p>
+        <a class="button" href="#plans">Explore Memberships</a>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Membership options</span>
+          <h2>Choose Your Plan</h2>
+          <p>
+            Find an option that fits your preferences and the way you
+            want to approach your fitness journey.
+          </p>
+        </div>
+
+        <p class="billing-note">
+          Sample plans and prices below — update these before publishing
+          real membership offers.
+        </p>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3 class="plan-name">Starter</h3>
+            <p class="plan-description">
+              A simple starting point for building your fitness routine.
+            </p>
+
+            <div class="price">R299 <span>/ month</span></div>
+            <p class="price-note">Illustrative price</p>
+
+            <ul class="features">
+              <li>Gym access during standard hours</li>
+              <li>Access to basic workout equipment</li>
+              <li>Self-guided training</li>
+              <li>Access to member information</li>
+            </ul>
+
+            <a class="button" href="join.html?plan=starter">
+              Choose Starter
+            </a>
+          </article>
+
+          <article class="price-card featured">
+            <span class="popular">Popular choice</span>
+            <h3 class="plan-name">Plus</h3>
+            <p class="plan-description">
+              A flexible option for members wanting more variety.
+            </p>
+
+            <div class="price">R449 <span>/ month</span></div>
+            <p class="price-note">Illustrative price</p>
+
+            <ul class="features">
+              <li>Everything in Starter</li>
+              <li>Access to listed group classes</li>
+              <li>Programme recommendations</li>
+              <li>Progress review template</li>
+            </ul>
+
+            <a class="button" href="join.html?plan=plus">
+              Choose Plus
+            </a>
+          </article>
+
+          <article class="price-card">
+            <h3 class="plan-name">Premium</h3>
+            <p class="plan-description">
+              An enhanced concept for members seeking extra guidance.
+            </p>
+
+            <div class="price">R699 <span>/ month</span></div>
+            <p class="price-note">Illustrative price</p>
+
+            <ul class="features">
+              <li>Everything in Plus</li>
+              <li>Introductory trainer consultation</li>
+              <li>Personalised programme discussion</li>
+              <li>Additional progress check-ins</li>
+            </ul>
+
+            <a class="button" href="join.html?plan=premium">
+              Choose Premium
+            </a>
+          </article>
+        </div>
+
+        <p class="note">
+          These prices and benefits are examples, not confirmed FitForge offers.
+          Availability, access hours and terms must be confirmed before launch.
+        </p>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Why FitForge</span>
+          <h2>More Than a Membership</h2>
+          <p>
+            Build a routine around your life with a welcoming approach
+            to movement, training and wellbeing.
+          </p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h3>Flexible Goals</h3>
+            <p>
+              Explore different training styles and work towards
+              milestones that matter to you.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon">🤝</div>
+            <h3>Supportive Community</h3>
+            <p>
+              Learn about the FitForge approach and find encouragement
+              as you develop your routine.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon">📈</div>
+            <h3>Progress at Your Pace</h3>
+            <p>
+              Focus on consistency, learn new skills and build habits
+              that can support long-term wellbeing.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Frequently asked questions</span>
+          <h2>Membership FAQs</h2>
+          <p>Some common questions about choosing a membership.</p>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>Which membership should I choose?</summary>
+            <p>
+              Consider your training preferences, the features you want
+              and your budget. Compare the plans before making a choice.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can beginners join FitForge?</summary>
+            <p>
+              The FitForge concept is designed to welcome different
+              experience levels. Start with manageable activities and
+              seek qualified guidance when needed.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I change my membership later?</summary>
+            <p>
+              Upgrade and cancellation arrangements have not yet been
+              specified. Confirm the final membership terms before
+              accepting payments or sign-ups.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do I sign up?</summary>
+            <p>
+              Use the membership button to visit the joining page.
+              The current website is a front-end concept and does not
+              yet process registrations or payments.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <span class="eyebrow">Your next step</span>
+        <h2>Ready to start your journey?</h2>
+        <p>
+          Explore our programmes or visit the joining page to see
+          the next steps in the FitForge experience.
+        </p>
+        <a class="button" href="programmes.html">Explore Programmes</a>
+        <a class="button" href="join.html" style="margin-left: 8px;">
+          Get Started
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
