@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover the FitForge story, our fitness philosophy and our commitment to helping everyone move forward.">
+  <title>About Us | FitForge</title>
+
+  <style>
+    :root {
+      --green: #a6e22e;
+      --dark: #172019;
+      --muted: #657067;
+      --light: #f6f8f4;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: white;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e8ece6;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #75a914;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: #75a914;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 13px 21px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(15, 25, 17, 0.70), rgba(15, 25, 17, 0.70)),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+      padding: 75px 0;
+    }
+
+    .eyebrow {
+      color: #75a914;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+    }
+
+    .hero .eyebrow {
+      color: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 25px;
+      font-size: 1.08rem;
+      color: #eef2ec;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .story-text h2,
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 12px 0 18px;
+    }
+
+    .story-text p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .values {
+      background: var(--light);
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 38px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .value-card {
+      background: white;
+      border: 1px solid #e5eae2;
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .value-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #eff7df;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .value-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .approach {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .approach-image img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .approach h2 {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin: 12px 0 18px;
+    }
+
+    .approach p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .check-list li {
+      margin: 10px 0;
+      font-weight: 700;
+    }
+
+    .check-list li::before {
+      content: "✓ ";
+      color: #6d9c16;
+      font-weight: 900;
+    }
+
+    .cta {
+      background: #eff7df;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin: 12px 0;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 24px;
+    }
+
+    footer {
+      background: #111912;
+      color: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p,
+    footer a {
+      color: #cbd3c9;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 850px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px 5%;
+        border-bottom: 1px solid #e8ece6;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .story,
+      .approach {
+        grid-template-columns: 1fr;
+      }
+
+      .story-image img,
+      .approach-image img {
+        height: 320px;
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        min-height: 340px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="button" href="join.html">Join Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">More than a gym</span>
+        <h1>Stronger together.<br>Better every day.</h1>
+        <p>
+          FitForge is built around the belief that fitness should feel
+          welcoming, achievable and rewarding for everyone.
+        </p>
+        <a class="button" href="programmes.html">Explore Our Programmes</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="container story">
+        <div class="story-image">
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1100&q=85"
+            alt="People training together in a gym"
+            loading="lazy">
+        </div>
+
+        <div class="story-text">
+          <span class="eyebrow">Our story</span>
+          <h2>Fitness for real life.</h2>
+          <p>
+            FitForge was created around a simple idea: everyone deserves
+            a place where they can work towards feeling stronger, healthier
+            and more confident.
+          </p>
+          <p>
+            Whether you're taking your first steps into the gym or building
+            on years of experience, your journey matters. Progress is personal,
+            and every step forward counts.
+          </p>
+          <p>
+            Our vision is to make fitness approachable through helpful guidance,
+            flexible training options and a community that encourages growth.
+          </p>
+          <a class="button" href="programmes.html">Find Your Programme</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="values">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">What we believe</span>
+          <h2>The FitForge Values</h2>
+          <p>
+            A positive fitness experience starts with the right mindset
+            and a welcoming environment.
+          </p>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card">
+            <div class="value-icon">💪</div>
+            <h3>Progress</h3>
+            <p>
+              Focus on consistent improvement, celebrate milestones
+              and remember that progress looks different for everyone.
+            </p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon">🤝</div>
+            <h3>Community</h3>
+            <p>
+              Create an encouraging space where people of different
+              backgrounds and experience levels feel welcome.
+            </p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon">🌱</div>
+            <h3>Balance</h3>
+            <p>
+              Build sustainable habits that support movement, recovery,
+              wellbeing and everyday life.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container approach">
+        <div>
+          <span class="eyebrow">Our approach</span>
+          <h2>Your goals. Your pace. Your journey.</h2>
+          <p>
+            We believe a good fitness routine should fit into your life.
+            Start with a manageable plan, learn the basics and adjust
+            your training as your confidence grows.
+          </p>
+
+          <ul class="check-list">
+            <li>Training options for different experience levels</li>
+            <li>Strength, cardio and wellness programmes</li>
+            <li>A focus on safe technique and steady progress</li>
+            <li>A welcoming approach for all fitness journeys</li>
+          </ul>
+
+          <a class="button" href="trainers.html">Meet Our Trainers</a>
+        </div>
+
+        <div class="approach-image">
+          <img
+            src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1100&q=85"
+            alt="Modern fitness space with gym equipment"
+            loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <span class="eyebrow">Your next chapter</span>
+        <h2>Ready to begin?</h2>
+        <p>
+          Discover the programmes and membership options that can help
+          you take your next step with FitForge.
+        </p>
+        <a class="button" href="memberships.html">Explore Memberships</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html">Fit<span>Forge</span></a>
+      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="programmes.html">Programmes</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
