@@ -1,639 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore FitForge fitness programmes for strength, cardio and wellness.">
-  <title>Programmes | FitForge</title>
-
-  <style>
-    :root {
-      --green: #a6e22e;
-      --dark: #172019;
-      --muted: #657067;
-      --light: #f6f8f4;
-      --white: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: auto;
-    }
-
-    header {
-      background: white;
-      border-bottom: 1px solid #e8ece6;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 1.65rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #75a914;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav-links a {
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover {
-      color: #75a914;
-    }
-
-    .nav-cta,
-    .button {
-      display: inline-block;
-      background: var(--green);
-      color: #172019;
-      padding: 13px 21px;
-      border-radius: 8px;
-      font-weight: 800;
-      border: 0;
-      cursor: pointer;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: 0;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      background: var(--light);
-      padding: 75px 0;
-      text-align: center;
-    }
-
-    .eyebrow {
-      color: #648f19;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.8rem;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      line-height: 1.08;
-      letter-spacing: -2px;
-      margin: 14px 0 18px;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto 25px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    section {
-      padding: 65px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      margin: 8px 0;
-      letter-spacing: -1px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
-    .filters {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 30px;
-    }
-
-    .filter-btn {
-      padding: 10px 18px;
-      border: 1px solid #dce3d8;
-      background: white;
-      border-radius: 30px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--green);
-      border-color: var(--green);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .programme-card {
-      border: 1px solid #e5eae2;
-      border-radius: 16px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 8px 25px rgba(20, 35, 20, 0.05);
-    }
-
-    .card-image {
-      height: 190px;
-      background: #e8eee3;
-      overflow: hidden;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .programme-card:hover .card-image img {
-      transform: scale(1.04);
-    }
-
-    .card-content {
-      padding: 23px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eff7df;
-      color: #4c7110;
-      border-radius: 30px;
-      padding: 5px 11px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .card-content h3 {
-      font-size: 1.35rem;
-      margin-bottom: 9px;
-    }
-
-    .card-content p {
-      color: var(--muted);
-      margin-bottom: 16px;
-      font-size: 0.94rem;
-    }
-
-    .details {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      border-top: 1px solid #edf0eb;
-      padding-top: 14px;
-      margin-bottom: 18px;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    .card-link {
-      font-weight: 800;
-      color: #557e12;
-    }
-
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    .feature {
-      background: var(--dark);
-      color: white;
-    }
-
-    .feature-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .feature h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.15;
-      margin: 12px 0 18px;
-    }
-
-    .feature p {
-      color: #cbd3c9;
-      margin-bottom: 22px;
-    }
-
-    .feature ul {
-      list-style: none;
-      margin-bottom: 25px;
-    }
-
-    .feature li {
-      margin: 10px 0;
-    }
-
-    .feature li::before {
-      content: "✓ ";
-      color: var(--green);
-      font-weight: 900;
-    }
-
-    .feature-image img {
-      width: 100%;
-      min-height: 280px;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-    }
-
-    .cta {
-      text-align: center;
-      background: #eff7df;
-    }
-
-    .cta h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      color: var(--muted);
-      margin: 0 auto 23px;
-      max-width: 600px;
-    }
-
-    footer {
-      background: #111912;
-      color: white;
-      padding: 30px 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    footer p,
-    footer a {
-      color: #cbd3c9;
-      font-size: 0.9rem;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    @media (max-width: 850px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 76px;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 20px 5%;
-        border-bottom: 1px solid #e8ece6;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .feature-inner {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding: 55px 0;
-      }
-
-      section {
-        padding: 48px 0;
-      }
-
-      .card-image {
-        height: 220px;
-      }
-
-      .details {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore FitForge gym and home workout programmes for beginners and experienced fitness enthusiasts.">
+<title>Workout Programmes | FitForge</title>
+<style>
+:root {
+  --green: #a6e22e;
+  --green-dark: #648f19;
+  --dark: #172019;
+  --muted: #657067;
+  --light: #f6f8f4;
+  --border: #e3e9df;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--dark);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  max-width: 1180px;
+  margin: auto;
+  padding: 16px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo { font-size: 25px; font-weight: 900; letter-spacing: -1px; }
+.logo span { color: var(--green-dark); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.nav-links a:hover { color: var(--green-dark); }
+.join-link {
+  background: var(--green);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.menu-button {
+  display: none;
+  border: 0;
+  background: var(--light);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.hero {
+  padding: 90px 5%;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(15,25,17,.88), rgba(15,25,17,.35)),
+    url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+.hero-content { max-width: 1180px; margin: auto; }
+.eyebrow {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+h1 {
+  max-width: 700px;
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.08;
+  margin: 15px 0;
+}
+.hero p { max-width: 600px; color: #e5e9e3; font-size: 17px; }
+.button {
+  display: inline-block;
+  margin: 12px 8px 0 0;
+  padding: 13px 19px;
+  border-radius: 8px;
+  background: var(--green);
+  color: var(--dark);
+  font-weight: 800;
+}
+.button-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,.7);
+}
+.section {
+  max-width: 1180px;
+  margin: auto;
+  padding: 65px 5%;
+}
+.section-heading {
+  max-width: 700px;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+.section-heading h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  margin: 10px 0;
+}
+.section-heading p { color: var(--muted); }
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.choice-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 28px rgba(23,32,25,.05);
+}
+.choice-card img {
+  width: 100%;
+  height: 290px;
+  object-fit: cover;
+  display: block;
+}
+.choice-content { padding: 27px; }
+.choice-content h3 { font-size: 27px; margin: 8px 0; }
+.choice-content p { color: var(--muted); }
+.feature-list { padding-left: 20px; color: var(--muted); }
+.feature-list li { margin: 8px 0; }
+.pill {
+  display: inline-block;
+  background: #eef6e1;
+  color: #4b6d19;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.programme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.programme-card {
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 24px;
+  background: white;
+}
+.programme-card h3 { font-size: 21px; margin: 12px 0 8px; }
+.programme-card p { color: var(--muted); }
+.programme-card ul { padding-left: 19px; color: var(--muted); }
+.programme-card li { margin: 7px 0; }
+.icon { font-size: 27px; }
+.notice {
+  padding: 17px 20px;
+  background: var(--light);
+  color: var(--muted);
+  border-radius: 12px;
+  font-size: 14px;
+  margin-top: 25px;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.step {
+  padding: 25px;
+  border-radius: 15px;
+  background: var(--light);
+}
+.step-number {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  border-radius: 50%;
+  font-weight: 900;
+}
+.step h3 { margin-bottom: 5px; }
+.step p { color: var(--muted); }
+.cta {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 60px 5%;
+}
+.cta h2 { font-size: clamp(29px, 4vw, 42px); margin: 8px 0; }
+.cta p { color: #c5cec4; max-width: 650px; margin: 0 auto 15px; }
+footer { background: #111812; color: white; padding: 35px 5%; text-align: center; }
+footer p { color: #c5cec4; font-size: 13px; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin: 18px 0;
+  font-size: 13px;
+}
+@media(max-width:1000px) {
+  .menu-button { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 20px 5%;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-links.open { display: flex; }
+  .programme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:650px) {
+  .hero { padding: 65px 5%; }
+  .section { padding: 45px 5%; }
+  .choice-grid, .programme-grid, .steps { grid-template-columns: 1fr; }
+  .choice-card img { height: 230px; }
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="container nav">
-      <a class="logo" href="index.html">Fit<span>Forge</span></a>
 
-      <button class="menu-toggle" id="menuToggle"
-        aria-label="Open navigation" aria-expanded="false">☰</button>
+<header>
+<nav class="nav">
+  <a class="logo" href="index.html">Fit<span>Forge</span></a>
+  <button class="menu-button" id="menuButton" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="trainers.html">Trainers</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="memberships.html">Memberships</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="testimonials.html">Reviews</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a class="join-link" href="join.html">Join Now</a>
+  </div>
+</nav>
+</header>
 
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="programmes.html">Programmes</a>
-        <a href="trainers.html">Trainers</a>
-        <a href="facilities.html">Facilities</a>
-        <a href="memberships.html">Memberships</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">Find your training style</span>
+    <h1>Your Goals. Your Space. Your Fitness Journey.</h1>
+    <p>
+      Train with gym equipment or exercise from the comfort of home.
+      Explore flexible workout ideas designed to help you build
+      strength, improve fitness and stay consistent.
+    </p>
+    <a class="button" href="#choose">Explore Workouts →</a>
+    <a class="button button-outline" href="join.html">Join FitForge</a>
+  </div>
+</section>
 
-      <a class="nav-cta" href="join.html">Join Now</a>
-    </div>
-  </header>
+<section class="section" id="choose">
+  <div class="section-heading">
+    <span class="eyebrow">Two ways to train</span>
+    <h2>Choose your workout environment</h2>
+    <p>
+      You don't need the same equipment or surroundings as everyone else.
+      Choose an approach that works for your lifestyle.
+    </p>
+  </div>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <span class="eyebrow">Find your strength</span>
-        <h1>Training that fits<br>your goals.</h1>
-        <p>
-          Whether you're starting out or ready to challenge yourself,
-          discover a programme that helps you move forward at your own pace.
-        </p>
-        <a class="button" href="#all-programmes">Explore Programmes</a>
+  <div class="choice-grid">
+    <article class="choice-card">
+      <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=85" alt="Gym with exercise equipment">
+      <div class="choice-content">
+        <span class="pill">GYM TRAINING</span>
+        <h3>Train at the Gym</h3>
+        <p>Use gym machines, free weights and dedicated training areas to build a varied exercise routine.</p>
+        <ul class="feature-list">
+          <li>Strength and resistance training</li>
+          <li>Machine and free-weight exercises</li>
+          <li>Structured full-body sessions</li>
+          <li>Options for different experience levels</li>
+        </ul>
+        <a class="button" href="#gym-programmes">View Gym Plans →</a>
       </div>
-    </section>
+    </article>
 
-    <section id="all-programmes">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Choose your path</span>
-          <h2>Explore Our Programmes</h2>
-          <p>Find the training style that works for you.</p>
-        </div>
-
-        <div class="filters" aria-label="Filter programmes">
-          <button class="filter-btn active" data-filter="all">All Programmes</button>
-          <button class="filter-btn" data-filter="strength">Strength</button>
-          <button class="filter-btn" data-filter="cardio">Cardio</button>
-          <button class="filter-btn" data-filter="wellness">Wellness</button>
-        </div>
-
-        <div class="grid" id="programmeGrid">
-          <article class="programme-card" data-category="strength">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80"
-                alt="Athlete training with weights" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Strength</span>
-              <h3>Strength Training</h3>
-              <p>Build strength and confidence with guided resistance exercises and progressive training.</p>
-              <div class="details">
-                <span>Beginner to advanced</span>
-                <span>45–60 min</span>
-              </div>
-              <a class="card-link" href="strength-training.html">Explore Strength →</a>
-            </div>
-          </article>
-
-          <article class="programme-card" data-category="cardio">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=80"
-                alt="Athlete running during cardio training" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Cardio</span>
-              <h3>Cardio & Endurance</h3>
-              <p>Improve stamina and cardiovascular fitness with adaptable cardio sessions.</p>
-              <div class="details">
-                <span>All levels</span>
-                <span>20–45 min</span>
-              </div>
-              <a class="card-link" href="cardio.html">Explore Cardio →</a>
-            </div>
-          </article>
-
-          <article class="programme-card" data-category="wellness">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=900&q=80"
-                alt="Person practising a yoga stretch" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Wellness</span>
-              <h3>Mobility & Wellness</h3>
-              <p>Support flexibility, balance and recovery with mindful movement and mobility work.</p>
-              <div class="details">
-                <span>All levels</span>
-                <span>20–40 min</span>
-              </div>
-              <a class="card-link" href="wellness.html">Explore Wellness →</a>
-            </div>
-          </article>
-
-          <article class="programme-card" data-category="strength">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80"
-                alt="Modern gym with strength equipment" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Strength</span>
-              <h3>Full-Body Training</h3>
-              <p>Train your major muscle groups in a balanced routine designed around your experience.</p>
-              <div class="details">
-                <span>Beginner friendly</span>
-                <span>40–55 min</span>
-              </div>
-              <a class="card-link" href="strength-training.html">View Training →</a>
-            </div>
-          </article>
-
-          <article class="programme-card" data-category="cardio">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=900&q=80"
-                alt="Gym equipment for cardio and conditioning" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Cardio</span>
-              <h3>Conditioning</h3>
-              <p>Combine manageable intervals and movement to build fitness over time.</p>
-              <div class="details">
-                <span>Intermediate</span>
-                <span>25–40 min</span>
-              </div>
-              <a class="card-link" href="cardio.html">View Conditioning →</a>
-            </div>
-          </article>
-
-          <article class="programme-card" data-category="wellness">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80"
-                alt="Person stretching on an exercise mat" loading="lazy">
-            </div>
-            <div class="card-content">
-              <span class="tag">Wellness</span>
-              <h3>Stretch & Recover</h3>
-              <p>Make time for gentle stretching and recovery as part of a balanced fitness routine.</p>
-              <div class="details">
-                <span>All levels</span>
-                <span>15–30 min</span>
-              </div>
-              <a class="card-link" href="wellness.html">View Wellness →</a>
-            </div>
-          </article>
-        </div>
+    <article class="choice-card">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=85" alt="Person exercising on a mat at home">
+      <div class="choice-content">
+        <span class="pill">HOME TRAINING</span>
+        <h3>Train at Home</h3>
+        <p>Build a practical routine around your space, schedule and available equipment.</p>
+        <ul class="feature-list">
+          <li>Bodyweight exercise options</li>
+          <li>Workouts for small spaces</li>
+          <li>Optional dumbbells or resistance bands</li>
+          <li>Flexible sessions at home</li>
+        </ul>
+        <a class="button" href="#home-programmes">View Home Plans →</a>
       </div>
-    </section>
+    </article>
+  </div>
+</section>
 
-    <section class="feature">
-      <div class="container feature-inner">
-        <div>
-          <span class="eyebrow">Your journey, your pace</span>
-          <h2>Start where you are.<br>Build from there.</h2>
-          <p>
-            You don't need to be an expert to begin. Choose a comfortable
-            starting point, focus on good technique and build consistency over time.
-          </p>
-          <ul>
-            <li>Options for different experience levels</li>
-            <li>Strength, cardio and wellness choices</li>
-            <li>A flexible approach to your fitness goals</li>
-          </ul>
-          <a class="button" href="trainers.html">Meet Our Trainers</a>
-        </div>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80"
-            alt="Well-equipped modern fitness gym" loading="lazy">
-        </div>
-      </div>
-    </section>
+<section class="section" id="gym-programmes">
+  <div class="section-heading">
+    <span class="eyebrow">Gym programmes</span>
+    <h2>Explore Gym Training</h2>
+    <p>These example workout structures can help you plan your sessions. Adjust exercises to your ability and equipment.</p>
+  </div>
 
-    <section class="cta">
-      <div class="container">
-        <span class="eyebrow">Take the next step</span>
-        <h2>Ready to find your programme?</h2>
-        <p>
-          Explore membership options and choose how you want to begin your FitForge journey.
-        </p>
-        <a class="button" href="memberships.html">View Memberships</a>
-      </div>
-    </section>
-  </main>
+  <div class="programme-grid">
+    <article class="programme-card">
+      <div class="icon">🌱</div>
+      <span class="pill">BEGINNER</span>
+      <h3>Full-Body Foundations</h3>
+      <p>Learn basic movement patterns and get comfortable with gym equipment.</p>
+      <ul>
+        <li>Leg press or chair squat</li>
+        <li>Chest press machine</li>
+        <li>Seated row machine</li>
+        <li>Comfortable-paced cardio</li>
+      </ul>
+      <p><strong>Suggested schedule:</strong> 2–3 non-consecutive days weekly.</p>
+    </article>
 
-  <footer>
-    <div class="container footer-inner">
-      <a class="logo" href="index.html">Fit<span>Forge</span></a>
-      <p>© <span id="year"></span> FitForge. Your fitness, your future.</p>
-      <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="memberships.html">Memberships</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
+    <article class="programme-card">
+      <div class="icon">🏋️</div>
+      <span class="pill">GENERAL FITNESS</span>
+      <h3>Strength and Fitness</h3>
+      <p>Combine resistance exercises with cardiovascular activity.</p>
+      <ul>
+        <li>Squat variation</li>
+        <li>Chest press or push-up</li>
+        <li>Lat pulldown or row</li>
+        <li>Walking, cycling or rowing</li>
+      </ul>
+      <p><strong>Focus:</strong> Good technique and gradual progress.</p>
+    </article>
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+    <article class="programme-card">
+      <div class="icon">⚡</div>
+      <span class="pill">FLEXIBLE</span>
+      <h3>Short Gym Sessions</h3>
+      <p>A compact session for days when you have less time available.</p>
+      <ul>
+        <li>Choose 3–4 familiar exercises</li>
+        <li>Warm up before working sets</li>
+        <li>Rest as needed between sets</li>
+        <li>Finish with optional easy cardio</li>
+      </ul>
+      <p><strong>Focus:</strong> Consistency, not rushing.</p>
+    </article>
+  </div>
+</section>
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", isOpen);
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
+<section class="section" id="home-programmes">
+  <div class="section-heading">
+    <span class="eyebrow">Home programmes</span>
+    <h2>Make Your Home Your Training Space</h2>
+    <p>Try these example routines with suitable modifications. Equipment is optional unless stated.</p>
+  </div>
 
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const programmeCards = document.querySelectorAll(".programme-card");
+  <div class="programme-grid">
+    <article class="programme-card">
+      <div class="icon">🏠</div>
+      <span class="pill">NO EQUIPMENT</span>
+      <h3>Home Workout Basics</h3>
+      <p>A simple introduction to exercising in your own space.</p>
+      <ul>
+        <li>Chair squats</li>
+        <li>Wall push-ups</li>
+        <li>Glute bridges</li>
+        <li>Marching in place</li>
+      </ul>
+      <p><strong>Focus:</strong> Comfortable movement and control.</p>
+    </article>
 
-    filterButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        const filter = button.dataset.filter;
+    <article class="programme-card">
+      <div class="icon">💪</div>
+      <span class="pill">OPTIONAL EQUIPMENT</span>
+      <h3>Home Strength</h3>
+      <p>Use bodyweight or suitable resistance equipment you already own.</p>
+      <ul>
+        <li>Squat variation</li>
+        <li>Incline push-ups</li>
+        <li>Resistance-band rows</li>
+        <li>Glute bridges</li>
+      </ul>
+      <p><strong>Focus:</strong> Controlled repetitions and progression.</p>
+    </article>
 
-        filterButtons.forEach(function (item) {
-          item.classList.remove("active");
-        });
+    <article class="programme-card">
+      <div class="icon">🚶</div>
+      <span class="pill">LOW-IMPACT OPTION</span>
+      <h3>Move More at Home</h3>
+      <p>A gentler option for building an exercise habit.</p>
+      <ul>
+        <li>Marching in place</li>
+        <li>Side steps</li>
+        <li>Chair-supported movements</li>
+        <li>Gentle mobility exercises</li>
+      </ul>
+      <p><strong>Focus:</strong> Start at a comfortable pace.</p>
+    </article>
+  </div>
 
-        button.classList.add("active");
+  <div class="notice">
+    Training note: These are general example routines, not personalised medical advice.
+    Begin at a manageable level, use a clear and safe exercise area, and stop if an
+    exercise causes pain, dizziness or unusual symptoms.
+  </div>
+</section>
 
-        programmeCards.forEach(function (card) {
-          const showCard =
-            filter === "all" || card.dataset.category === filter;
-          card.style.display = showCard ? "" : "none";
-        });
-      });
-    });
+<section class="section">
+  <div class="section-heading">
+    <span class="eyebrow">Build your routine</span>
+    <h2>Getting Started Is Simple</h2>
+  </div>
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <div class="steps">
+    <article class="step">
+      <div class="step-number">1</div>
+      <h3>Choose Your Space</h3>
+      <p>Decide whether you'll train at the gym, at home or combine both.</p>
+    </article>
+    <article class="step">
+      <div class="step-number">2</div>
+      <h3>Pick Your Starting Level</h3>
+      <p>Choose familiar exercises and begin with a manageable challenge.</p>
+    </article>
+    <article class="step">
+      <div class="step-number">3</div>
+      <h3>Stay Consistent</h3>
+      <p>Follow a routine that fits your schedule and allow time for recovery.</p>
+    </article>
+  </div>
+</section>
+
+<section class="cta">
+  <span class="eyebrow">Your journey starts here</span>
+  <h2>Ready to Find Your Fit?</h2>
+  <p>Explore FitForge, discover your preferred training style and take the next step toward your personal fitness goals.</p>
+  <a class="button" href="join.html">Get Started →</a>
+  <a class="button button-outline" href="faq.html">Read FAQs</a>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="index.html">Fit<span>Forge</span></a>
+  <p>Build strength. Build confidence. Build your future.</p>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="memberships.html">Memberships</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="testimonials.html">Reviews</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© <span id="year"></span> FitForge. All rights reserved.</p>
+</footer>
+
+<script>
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", function () {
+  const isOpen = navLinks.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", isOpen);
+  menuButton.textContent = isOpen ? "✕" : "☰";
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
